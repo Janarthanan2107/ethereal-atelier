@@ -1,4 +1,7 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { StoreProvider } from "@/hooks/use-store";
+import CartDrawer from "@/components/CartDrawer";
+import WishlistDrawer from "@/components/WishlistDrawer";
 import "@fontsource/noto-serif/400.css";
 import "@fontsource/noto-serif/700.css";
 import "@fontsource/plus-jakarta-sans/400.css";
@@ -61,5 +64,11 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <StoreProvider>
+      <Outlet />
+      <CartDrawer />
+      <WishlistDrawer />
+    </StoreProvider>
+  );
 }
