@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import heroImage from "@/assets/hero-saree.jpg";
 
@@ -56,9 +57,9 @@ export default function HeroSection() {
             variants={silk}
             className="mt-10 flex items-center gap-8"
           >
-            <button className="bg-primary-container px-8 py-3.5 text-sm tracking-[0.05em] uppercase text-on-primary transition-all duration-400 hover:opacity-90">
+            <Link to="/collections" className="inline-block bg-primary-container px-8 py-3.5 text-sm tracking-[0.05em] uppercase text-on-primary transition-all duration-400 hover:opacity-90">
               Explore Collection
-            </button>
+            </Link>
             <span className="gold-link cursor-pointer">Our Story</span>
           </motion.div>
         </div>

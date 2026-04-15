@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import saree1 from "@/assets/saree-texture-1.jpg";
 import saree2 from "@/assets/saree-texture-2.jpg";
@@ -45,7 +46,7 @@ export default function FeaturedCollection() {
               The Collection
             </h2>
           </div>
-          <span className="gold-link cursor-pointer self-start md:self-auto">View All Sarees</span>
+          <Link to="/collections" className="gold-link self-start md:self-auto">View All Sarees</Link>
         </div>
 
         {/* Product grid – intentional asymmetry */}
