@@ -59,7 +59,7 @@ function ProductActions({ productId }: { productId: string }) {
   );
 }
 
-
+function ProductDetailPage() {
   const { productId } = Route.useParams();
   const product = getProductById(productId);
 
