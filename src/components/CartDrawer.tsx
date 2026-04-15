@@ -115,9 +115,13 @@ export default function CartDrawer() {
                     ₹{cartTotal.toLocaleString("en-IN")}
                   </span>
                 </div>
-                <button className="w-full bg-primary-container py-3.5 text-sm tracking-[0.05em] uppercase text-on-primary transition-opacity duration-400 hover:opacity-90">
+                <Link
+                  to="/checkout"
+                  onClick={() => setCartOpen(false)}
+                  className="block w-full bg-primary-container py-3.5 text-center text-sm tracking-[0.05em] uppercase text-on-primary transition-opacity duration-400 hover:opacity-90"
+                >
                   Proceed to Checkout
-                </button>
+                </Link>
               </div>
             )}
           </motion.aside>
