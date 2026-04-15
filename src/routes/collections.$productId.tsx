@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import FabricZoom from "@/components/FabricZoom";
 import { getProductById, getSimilarProducts } from "@/data/products";
+import { useStore } from "@/hooks/use-store";
 
 export const Route = createFileRoute("/collections/$productId")({
   component: ProductDetailPage,
@@ -32,6 +33,31 @@ export const Route = createFileRoute("/collections/$productId")({
     </main>
   ),
 });
+
+function ProductActions({ productId }: { productId: string }) {
+  const { addToCart, toggleWishlist, isInWishlist, isInCart } = useStore();
+  const product = getProductById(productId);
+  if (!product) return null;
+  const wishlisted = isInWishlist(productId);
+  const inCart = isInCart(productId);
+
+  return (
+    <div className="mt-10 flex flex-wrap items-center gap-5">
+      <button
+        onClick={() => addToCart(product)}
+        className="bg-primary-container px-10 py-3.5 text-sm tracking-[0.05em] uppercase text-on-primary transition-opacity duration-400 hover:opacity-90"
+      >
+        {inCart ? "Added to Cart ✓" : "Add to Cart"}
+      </button>
+      <button
+        onClick={() => toggleWishlist(product)}
+        className="gold-link cursor-pointer"
+      >
+        {wishlisted ? "♥ In Wishlist" : "Add to Wishlist"}
+      </button>
+    </div>
+  );
+}
 
 function ProductDetailPage() {
   const { productId } = Route.useParams();
@@ -103,12 +129,7 @@ function ProductDetailPage() {
             </div>
 
             {/* CTA */}
-            <div className="mt-10 flex flex-wrap items-center gap-5">
-              <button className="bg-primary-container px-10 py-3.5 text-sm tracking-[0.05em] uppercase text-on-primary transition-opacity duration-400 hover:opacity-90">
-                Enquire Now
-              </button>
-              <span className="gold-link cursor-pointer">Add to Wishlist</span>
-            </div>
+            <ProductActions productId={product.id} />
           </motion.div>
         </div>
       </section>
