@@ -3,10 +3,10 @@ import { Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { label: "Collections", href: "/" },
-  { label: "Heritage", href: "/" },
-  { label: "Atelier", href: "/" },
-  { label: "Journal", href: "/" },
+  { label: "Collections", href: "/collections" as const },
+  { label: "Heritage", href: "/" as const },
+  { label: "Atelier", href: "/" as const },
+  { label: "Journal", href: "/" as const },
 ];
 
 export default function Navigation() {
@@ -23,9 +23,9 @@ export default function Navigation() {
         {/* Desktop links */}
         <div className="hidden items-center gap-10 md:flex">
           {navLinks.map((link) => (
-            <span key={link.label} className="gold-link cursor-pointer">
+            <Link key={link.label} to={link.href} className="gold-link">
               {link.label}
-            </span>
+            </Link>
           ))}
         </div>
 
@@ -53,13 +53,14 @@ export default function Navigation() {
           >
             <div className="flex flex-col gap-6 px-8 py-8">
               {navLinks.map((link) => (
-                <span
+                <Link
                   key={link.label}
-                  className="gold-link cursor-pointer text-base"
+                  to={link.href}
+                  className="gold-link text-base"
                   onClick={() => setMenuOpen(false)}
                 >
                   {link.label}
-                </span>
+                </Link>
               ))}
             </div>
           </motion.div>

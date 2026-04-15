@@ -5,7 +5,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { products, weaveTypes, type WeaveType } from "@/data/products";
 
-export const Route = createFileRoute("/collections")({
+export const Route = createFileRoute("/collections/")({
   component: CollectionsPage,
   head: () => ({
     meta: [
