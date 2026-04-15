@@ -34,7 +34,32 @@ export const Route = createFileRoute("/collections/$productId")({
   ),
 });
 
-function ProductDetailPage() {
+function ProductActions({ productId }: { productId: string }) {
+  const { addToCart, toggleWishlist, isInWishlist, isInCart } = useStore();
+  const product = getProductById(productId);
+  if (!product) return null;
+  const wishlisted = isInWishlist(productId);
+  const inCart = isInCart(productId);
+
+  return (
+    <div className="mt-10 flex flex-wrap items-center gap-5">
+      <button
+        onClick={() => addToCart(product)}
+        className="bg-primary-container px-10 py-3.5 text-sm tracking-[0.05em] uppercase text-on-primary transition-opacity duration-400 hover:opacity-90"
+      >
+        {inCart ? "Added to Cart ✓" : "Add to Cart"}
+      </button>
+      <button
+        onClick={() => toggleWishlist(product)}
+        className="gold-link cursor-pointer"
+      >
+        {wishlisted ? "♥ In Wishlist" : "Add to Wishlist"}
+      </button>
+    </div>
+  );
+}
+
+
   const { productId } = Route.useParams();
   const product = getProductById(productId);
 
