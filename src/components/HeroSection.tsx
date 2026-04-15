@@ -6,7 +6,7 @@ const silk = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: 0.3 + i * 0.15, duration: 0.8, ease: [0.4, 0, 0.2, 1] },
+    transition: { delay: 0.3 + i * 0.15, duration: 0.8, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] },
   }),
 };
 
