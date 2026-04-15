@@ -1,26 +1,30 @@
 import { createFileRoute } from "@tanstack/react-router";
+import Navigation from "@/components/Navigation";
+import HeroSection from "@/components/HeroSection";
+import FeaturedCollection from "@/components/FeaturedCollection";
+import EditorialSection from "@/components/EditorialSection";
+import Footer from "@/components/Footer";
 
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: "Megam Drapes — Premium Handwoven Silk Sarees" },
+      { name: "description", content: "Discover India's finest handwoven silk sarees at Megam Drapes. A curated atelier of Banarasi, Kanjeevaram, and heritage weaves crafted by master artisans." },
+      { property: "og:title", content: "Megam Drapes — Premium Handwoven Silk Sarees" },
+      { property: "og:description", content: "A curated atelier of India's finest handwoven silk sarees — where heritage meets modern elegance." },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
-
 function Index() {
-  return <PlaceholderIndex />;
+  return (
+    <main>
+      <Navigation />
+      <HeroSection />
+      <FeaturedCollection />
+      <EditorialSection />
+      <Footer />
+    </main>
+  );
 }
