@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CollectionsIndexRouteImport } from './routes/collections.index'
 import { Route as CollectionsProductIdRouteImport } from './routes/collections.$productId'
 
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,36 +37,52 @@ const CollectionsProductIdRoute = CollectionsProductIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/checkout': typeof CheckoutRoute
   '/collections/$productId': typeof CollectionsProductIdRoute
   '/collections/': typeof CollectionsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/checkout': typeof CheckoutRoute
   '/collections/$productId': typeof CollectionsProductIdRoute
   '/collections': typeof CollectionsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/checkout': typeof CheckoutRoute
   '/collections/$productId': typeof CollectionsProductIdRoute
   '/collections/': typeof CollectionsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/collections/$productId' | '/collections/'
+  fullPaths: '/' | '/checkout' | '/collections/$productId' | '/collections/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/collections/$productId' | '/collections'
-  id: '__root__' | '/' | '/collections/$productId' | '/collections/'
+  to: '/' | '/checkout' | '/collections/$productId' | '/collections'
+  id:
+    | '__root__'
+    | '/'
+    | '/checkout'
+    | '/collections/$productId'
+    | '/collections/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CheckoutRoute: typeof CheckoutRoute
   CollectionsProductIdRoute: typeof CollectionsProductIdRoute
   CollectionsIndexRoute: typeof CollectionsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +109,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CheckoutRoute: CheckoutRoute,
   CollectionsProductIdRoute: CollectionsProductIdRoute,
   CollectionsIndexRoute: CollectionsIndexRoute,
 }
