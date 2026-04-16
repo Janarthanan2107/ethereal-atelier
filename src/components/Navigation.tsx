@@ -5,9 +5,9 @@ import { useStore } from "@/hooks/use-store";
 
 const navLinks = [
   { label: "Collections", href: "/collections" as const },
-  { label: "Heritage", href: "/" as const },
-  { label: "Atelier", href: "/" as const },
-  { label: "Journal", href: "/" as const },
+  { label: "Heritage", href: "/heritage" as const },
+  { label: "Atelier", href: "/atelier" as const },
+  { label: "Journal", href: "/journal" as const },
 ];
 
 export default function Navigation() {
