@@ -9,14 +9,32 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as JournalRouteImport } from './routes/journal'
+import { Route as HeritageRouteImport } from './routes/heritage'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as AtelierRouteImport } from './routes/atelier'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CollectionsIndexRouteImport } from './routes/collections.index'
 import { Route as CollectionsProductIdRouteImport } from './routes/collections.$productId'
 
+const JournalRoute = JournalRouteImport.update({
+  id: '/journal',
+  path: '/journal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HeritageRoute = HeritageRouteImport.update({
+  id: '/heritage',
+  path: '/heritage',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CheckoutRoute = CheckoutRouteImport.update({
   id: '/checkout',
   path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AtelierRoute = AtelierRouteImport.update({
+  id: '/atelier',
+  path: '/atelier',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -37,50 +55,100 @@ const CollectionsProductIdRoute = CollectionsProductIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/atelier': typeof AtelierRoute
   '/checkout': typeof CheckoutRoute
+  '/heritage': typeof HeritageRoute
+  '/journal': typeof JournalRoute
   '/collections/$productId': typeof CollectionsProductIdRoute
   '/collections/': typeof CollectionsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/atelier': typeof AtelierRoute
   '/checkout': typeof CheckoutRoute
+  '/heritage': typeof HeritageRoute
+  '/journal': typeof JournalRoute
   '/collections/$productId': typeof CollectionsProductIdRoute
   '/collections': typeof CollectionsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/atelier': typeof AtelierRoute
   '/checkout': typeof CheckoutRoute
+  '/heritage': typeof HeritageRoute
+  '/journal': typeof JournalRoute
   '/collections/$productId': typeof CollectionsProductIdRoute
   '/collections/': typeof CollectionsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/checkout' | '/collections/$productId' | '/collections/'
+  fullPaths:
+    | '/'
+    | '/atelier'
+    | '/checkout'
+    | '/heritage'
+    | '/journal'
+    | '/collections/$productId'
+    | '/collections/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/checkout' | '/collections/$productId' | '/collections'
+  to:
+    | '/'
+    | '/atelier'
+    | '/checkout'
+    | '/heritage'
+    | '/journal'
+    | '/collections/$productId'
+    | '/collections'
   id:
     | '__root__'
     | '/'
+    | '/atelier'
     | '/checkout'
+    | '/heritage'
+    | '/journal'
     | '/collections/$productId'
     | '/collections/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AtelierRoute: typeof AtelierRoute
   CheckoutRoute: typeof CheckoutRoute
+  HeritageRoute: typeof HeritageRoute
+  JournalRoute: typeof JournalRoute
   CollectionsProductIdRoute: typeof CollectionsProductIdRoute
   CollectionsIndexRoute: typeof CollectionsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/journal': {
+      id: '/journal'
+      path: '/journal'
+      fullPath: '/journal'
+      preLoaderRoute: typeof JournalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/heritage': {
+      id: '/heritage'
+      path: '/heritage'
+      fullPath: '/heritage'
+      preLoaderRoute: typeof HeritageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/checkout': {
       id: '/checkout'
       path: '/checkout'
       fullPath: '/checkout'
       preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/atelier': {
+      id: '/atelier'
+      path: '/atelier'
+      fullPath: '/atelier'
+      preLoaderRoute: typeof AtelierRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -109,19 +177,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AtelierRoute: AtelierRoute,
   CheckoutRoute: CheckoutRoute,
+  HeritageRoute: HeritageRoute,
+  JournalRoute: JournalRoute,
   CollectionsProductIdRoute: CollectionsProductIdRoute,
   CollectionsIndexRoute: CollectionsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
