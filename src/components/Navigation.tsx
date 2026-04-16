@@ -8,6 +8,7 @@ const navLinks = [
   { label: "Heritage", href: "/heritage" as const },
   { label: "Atelier", href: "/atelier" as const },
   { label: "Journal", href: "/journal" as const },
+  { label: "Contact", href: "/contact" as const },
 ];
 
 export default function Navigation() {
