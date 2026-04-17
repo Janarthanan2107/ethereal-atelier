@@ -119,7 +119,7 @@ export default function AdminLayout() {
 function SidebarInner({
   nav, isActive, onLogout, userName, onNavigate,
 }: {
-  nav: typeof navItemsType;
+  nav: NavItem[];
   isActive: (to: string, exact?: boolean) => boolean;
   onLogout: () => void;
   userName: string;
