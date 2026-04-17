@@ -7,7 +7,8 @@ import {
 } from "lucide-react";
 import { useAdmin } from "./admin-store";
 
-const nav = [
+type NavItem = { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean };
+const nav: NavItem[] = [
   { to: "/admin", label: "Overview", icon: LayoutDashboard, exact: true },
   { to: "/admin/products", label: "Products", icon: Package },
   { to: "/admin/stock", label: "Stock", icon: Boxes },
@@ -17,7 +18,7 @@ const nav = [
   { to: "/admin/customers", label: "Customers", icon: Users },
   { to: "/admin/queries", label: "Enquiries", icon: Mail },
   { to: "/admin/settings", label: "Settings", icon: Settings },
-] as const;
+];
 
 export default function AdminLayout() {
   const { user, logout } = useAdmin();

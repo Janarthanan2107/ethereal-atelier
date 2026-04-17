@@ -16,9 +16,20 @@ import { Route as HeritageRouteImport } from './routes/heritage'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as AtelierRouteImport } from './routes/atelier'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CollectionsIndexRouteImport } from './routes/collections.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as CollectionsProductIdRouteImport } from './routes/collections.$productId'
+import { Route as AdminStockRouteImport } from './routes/admin.stock'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminReviewsRouteImport } from './routes/admin.reviews'
+import { Route as AdminQueriesRouteImport } from './routes/admin.queries'
+import { Route as AdminProductsRouteImport } from './routes/admin.products'
+import { Route as AdminOrdersRouteImport } from './routes/admin.orders'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminJournalRouteImport } from './routes/admin.journal'
+import { Route as AdminCustomersRouteImport } from './routes/admin.customers'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -55,6 +66,11 @@ const AtelierRoute = AtelierRouteImport.update({
   path: '/atelier',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -65,14 +81,65 @@ const CollectionsIndexRoute = CollectionsIndexRouteImport.update({
   path: '/collections/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const CollectionsProductIdRoute = CollectionsProductIdRouteImport.update({
   id: '/collections/$productId',
   path: '/collections/$productId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminStockRoute = AdminStockRouteImport.update({
+  id: '/stock',
+  path: '/stock',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminReviewsRoute = AdminReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminQueriesRoute = AdminQueriesRouteImport.update({
+  id: '/queries',
+  path: '/queries',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminProductsRoute = AdminProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminOrdersRoute = AdminOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminJournalRoute = AdminJournalRouteImport.update({
+  id: '/journal',
+  path: '/journal',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCustomersRoute = AdminCustomersRouteImport.update({
+  id: '/customers',
+  path: '/customers',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/atelier': typeof AtelierRoute
   '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
@@ -80,7 +147,17 @@ export interface FileRoutesByFullPath {
   '/journal': typeof JournalRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/admin/customers': typeof AdminCustomersRoute
+  '/admin/journal': typeof AdminJournalRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/products': typeof AdminProductsRoute
+  '/admin/queries': typeof AdminQueriesRoute
+  '/admin/reviews': typeof AdminReviewsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/stock': typeof AdminStockRoute
   '/collections/$productId': typeof CollectionsProductIdRoute
+  '/admin/': typeof AdminIndexRoute
   '/collections/': typeof CollectionsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -92,12 +169,23 @@ export interface FileRoutesByTo {
   '/journal': typeof JournalRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/admin/customers': typeof AdminCustomersRoute
+  '/admin/journal': typeof AdminJournalRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/products': typeof AdminProductsRoute
+  '/admin/queries': typeof AdminQueriesRoute
+  '/admin/reviews': typeof AdminReviewsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/stock': typeof AdminStockRoute
   '/collections/$productId': typeof CollectionsProductIdRoute
+  '/admin': typeof AdminIndexRoute
   '/collections': typeof CollectionsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/atelier': typeof AtelierRoute
   '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
@@ -105,13 +193,24 @@ export interface FileRoutesById {
   '/journal': typeof JournalRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/admin/customers': typeof AdminCustomersRoute
+  '/admin/journal': typeof AdminJournalRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/products': typeof AdminProductsRoute
+  '/admin/queries': typeof AdminQueriesRoute
+  '/admin/reviews': typeof AdminReviewsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/stock': typeof AdminStockRoute
   '/collections/$productId': typeof CollectionsProductIdRoute
+  '/admin/': typeof AdminIndexRoute
   '/collections/': typeof CollectionsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/atelier'
     | '/checkout'
     | '/contact'
@@ -119,7 +218,17 @@ export interface FileRouteTypes {
     | '/journal'
     | '/privacy'
     | '/terms'
+    | '/admin/customers'
+    | '/admin/journal'
+    | '/admin/login'
+    | '/admin/orders'
+    | '/admin/products'
+    | '/admin/queries'
+    | '/admin/reviews'
+    | '/admin/settings'
+    | '/admin/stock'
     | '/collections/$productId'
+    | '/admin/'
     | '/collections/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -131,11 +240,22 @@ export interface FileRouteTypes {
     | '/journal'
     | '/privacy'
     | '/terms'
+    | '/admin/customers'
+    | '/admin/journal'
+    | '/admin/login'
+    | '/admin/orders'
+    | '/admin/products'
+    | '/admin/queries'
+    | '/admin/reviews'
+    | '/admin/settings'
+    | '/admin/stock'
     | '/collections/$productId'
+    | '/admin'
     | '/collections'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/atelier'
     | '/checkout'
     | '/contact'
@@ -143,12 +263,23 @@ export interface FileRouteTypes {
     | '/journal'
     | '/privacy'
     | '/terms'
+    | '/admin/customers'
+    | '/admin/journal'
+    | '/admin/login'
+    | '/admin/orders'
+    | '/admin/products'
+    | '/admin/queries'
+    | '/admin/reviews'
+    | '/admin/settings'
+    | '/admin/stock'
     | '/collections/$productId'
+    | '/admin/'
     | '/collections/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AtelierRoute: typeof AtelierRoute
   CheckoutRoute: typeof CheckoutRoute
   ContactRoute: typeof ContactRoute
@@ -211,6 +342,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AtelierRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -225,6 +363,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollectionsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/collections/$productId': {
       id: '/collections/$productId'
       path: '/collections/$productId'
@@ -232,11 +377,103 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollectionsProductIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/stock': {
+      id: '/admin/stock'
+      path: '/stock'
+      fullPath: '/admin/stock'
+      preLoaderRoute: typeof AdminStockRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/reviews': {
+      id: '/admin/reviews'
+      path: '/reviews'
+      fullPath: '/admin/reviews'
+      preLoaderRoute: typeof AdminReviewsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/queries': {
+      id: '/admin/queries'
+      path: '/queries'
+      fullPath: '/admin/queries'
+      preLoaderRoute: typeof AdminQueriesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/products': {
+      id: '/admin/products'
+      path: '/products'
+      fullPath: '/admin/products'
+      preLoaderRoute: typeof AdminProductsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/orders': {
+      id: '/admin/orders'
+      path: '/orders'
+      fullPath: '/admin/orders'
+      preLoaderRoute: typeof AdminOrdersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/journal': {
+      id: '/admin/journal'
+      path: '/journal'
+      fullPath: '/admin/journal'
+      preLoaderRoute: typeof AdminJournalRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/customers': {
+      id: '/admin/customers'
+      path: '/customers'
+      fullPath: '/admin/customers'
+      preLoaderRoute: typeof AdminCustomersRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminCustomersRoute: typeof AdminCustomersRoute
+  AdminJournalRoute: typeof AdminJournalRoute
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminOrdersRoute: typeof AdminOrdersRoute
+  AdminProductsRoute: typeof AdminProductsRoute
+  AdminQueriesRoute: typeof AdminQueriesRoute
+  AdminReviewsRoute: typeof AdminReviewsRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminStockRoute: typeof AdminStockRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminCustomersRoute: AdminCustomersRoute,
+  AdminJournalRoute: AdminJournalRoute,
+  AdminLoginRoute: AdminLoginRoute,
+  AdminOrdersRoute: AdminOrdersRoute,
+  AdminProductsRoute: AdminProductsRoute,
+  AdminQueriesRoute: AdminQueriesRoute,
+  AdminReviewsRoute: AdminReviewsRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminStockRoute: AdminStockRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   AtelierRoute: AtelierRoute,
   CheckoutRoute: CheckoutRoute,
   ContactRoute: ContactRoute,
